@@ -1,36 +1,18 @@
 package org.launchcode.studio7;
 
-public class CD extends BaseDisc implements org.launchcode.studio7trial2.OpticalDisc {
-    public CD() {
-        super(700 , 500);
+public class CD extends BaseDisc implements OpticalDisc{
+
+    public CD(String aName, int maxCapacity, String aType, int someUsedCapacity){
+        super(aName, maxCapacity, aType, someUsedCapacity);
     }
 
     @Override
     public void spinDisc() {
-        System.out.println("A CD spins at the rate of " + this.getSpinSpeed() + " rpm");
+        System.out.println("A CD spins at a rate of 200 - 500 rpm.");
     }
 
     @Override
-    public void storeData(String data) {
-        this.writeData(data);
+    public void readData() {
+        System.out.println("Would you like to play a game?");
     }
-
-    @Override
-    public boolean isFull() {
-        if(this.readData().length() >= this.getStorageCapacity()) return true;
-        else return false;
-    }
-
-    // TODO: Implement your custom interface.
-
-    // TODO: Determine which fields, methods, and constructors can be extended from the base class and which ones
-    //  need to be declared separately.
-
-
-
-    // TODO: Implement your custom interface.
-
-    // TODO: Determine which fields, methods, and constructors can be extended from the base class and which ones
-    //  need to be declared separately.
-
 }
