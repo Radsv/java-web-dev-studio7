@@ -4,17 +4,19 @@ public class Main {
 
     public static void main(String[] args){
 
-        CD myCD = new CD();
-        DVD myDVD = new DVD("My songs");
+        CD cd = new CD("CD Example", 700, "CD-R", 350);
+        DVD dvd = new DVD("DVD Example", 4700, "DVD-R", 1450);
 
-        myCD.spinDisc();
-        myDVD.spinDisc();
+        cd.spinDisc();
+        dvd.spinDisc();
 
-        myCD.writeData("Whats written?");
-        System.out.println(myCD.readData());
-        // TODO: Declare and initialize a CD and a DVD object.
+        cd.readData();
+        dvd.readData();
 
-        // TODO: Call each CD and DVD method to verify that they work as expected.
+        System.out.println(cd.writeData(275));
+        System.out.println(dvd.writeData(8000));
 
+        System.out.println(cd.diskInfo());
+        System.out.println(dvd.diskInfo());
     }
 }
