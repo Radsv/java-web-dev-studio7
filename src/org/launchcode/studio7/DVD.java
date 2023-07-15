@@ -1,32 +1,20 @@
 package org.launchcode.studio7;
 
-public class DVD extends BaseDisc implements org.launchcode.studio7trial2.OpticalDisc {
+public class DVD extends BaseDisc implements  OpticalDisc {
 
-    public DVD( String title) {
-        super(4000, 1600, title);
+    public DVD(String aName, int maxCapacity, String aType, int someUsedCapacity) {
+        super(aName, maxCapacity, aType, someUsedCapacity);
     }
 
     @Override
     public void spinDisc() {
-        System.out.println("A DVD spins at the rate of " + this.getSpinSpeed() + " rpm ");
+        System.out.println("A DVD spins at a rate of 570 - 1600 rpm.");
     }
 
     @Override
-    public void storeData(String data) {
-        this.writeData(data);
+    public void readData() {
+        System.out.println("I'm sorry, Dave. I'm afraid I can't do that.");
     }
 
-    @Override
-    public boolean isFull() {
-        if(this.readData().length() >= this.getStorageCapacity()) return true;
-        else return false;
-    }
+
 }
-
-// TODO: Implement your custom interface.
-
-// TODO: Determine which fields, methods, and constructors can be extended from the base class and which ones
-//  need to be declared separately.
-
-
-
