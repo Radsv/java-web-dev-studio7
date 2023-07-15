@@ -1,56 +1,48 @@
 package org.launchcode.studio7;
-
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public abstract class BaseDisc {
+    private String name;
+    private int storageCapacity;
+    private int remainingCapacity;
+    private int capacityUsed;
+    private String diskType;
+    private ArrayList<String> contents;
 
-    private String discData;
-    private HashMap<String , String> discInfo;
-    private boolean isInserted;
-    private final int storageCapacityInMB;
-    private final int spinSpeedInRPM;
-    public BaseDisc(int storageCapacity , int spinSpeed){
-        this.discData = " ";
-        this.discInfo = new HashMap<String , String>();
-        this.isInserted = false;
-        this.storageCapacityInMB = storageCapacity;
-        this.spinSpeedInRPM = spinSpeed;
-
-        this.discInfo.put("Storage Capacity", String.valueOf(storageCapacity));
-        this.discInfo.put("Spin Speed", String.valueOf(spinSpeed));
-
-    }
-    public BaseDisc(int storageCapacity , int spinSpeed, String title){
-        this(storageCapacity, spinSpeed);
-        this.discInfo.put("Title", title);
-
+    public BaseDisc(String aName, int maxCapacity, String aType, int someUsedCapacity) {
+        name = aName;
+        storageCapacity = maxCapacity;
+        diskType = aType;
+        capacityUsed = checkCapacity(someUsedCapacity);
+        remainingCapacity = spaceLeft();
     }
 
-    public boolean isInserted() {
-        return this.isInserted;
+    private int checkCapacity(int dataWritten) {
+        if (storageCapacity < dataWritten){
+            return storageCapacity;
+        }
+        return dataWritten;
     }
 
-    public int getStorageCapacity() {
-        return this.storageCapacityInMB;
+    private int spaceLeft(){
+        return storageCapacity - capacityUsed;
     }
 
-    public int getSpinSpeed() {
-        return this.spinSpeedInRPM;
+    public String diskInfo(){
+        String output = String.format("\nDisk Name: %s\nMax capacity: %d" +
+                "\nSpace used: %d" +
+                "\nAvailable space: %d\n", name, storageCapacity, capacityUsed, remainingCapacity);
+        return output;
     }
 
-    protected void writeData(String data){
-        this.discData += data;
+    public String writeData(int dataSize){
+        if (dataSize > remainingCapacity){
+            return "Not enough disc space!";
+        }
+        capacityUsed += dataSize;
+        remainingCapacity -= dataSize;
+
+        return "Data written to disc.  Remaining space = " + remainingCapacity;
     }
 
-    public String readData(){
-        return this.discData;
-    }
-
-    public HashMap<String, String> getDiscInfo() {
-        return this.discInfo;
-    }
-
-    public void insert(){
-        this.isInserted = true;
-    }
 }
